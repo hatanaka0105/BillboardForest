@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 #endregion
 
-namespace WindowsGame10
+namespace BillboardForest
 {
     /// <summary>
     /// カメラ

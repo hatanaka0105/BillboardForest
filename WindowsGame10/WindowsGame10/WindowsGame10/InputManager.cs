@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 #endregion
 
-namespace WindowsGame10
+namespace BillboardForest
 {
     /// <summary>
     /// 入力を管理します

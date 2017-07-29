@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsGame10</RootNamespace>
+    <RootNamespace>BillboardForest</RootNamespace>
     <AssemblyName>WindowsGame10</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -109,7 +109,9 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="ConstantMacro.cs" />
-    <Compile Include="DraｗObject.cs" />
+    <Compile Include="DrawObject.cs" />
+    <Compile Include="Ground.cs" />
+    <Compile Include="GroundManager.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Material.cs" />
@@ -128,8 +130,9 @@
       <Name>SkinnedModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\WindowsGame10Content\WindowsGame10Content.contentproj">
-      <Name>WindowsGame10Content</Name>
+      <Name>WindowsGame10Content %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{EE916D25-9E8C-4562-8C76-6FE4E2CA3441}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

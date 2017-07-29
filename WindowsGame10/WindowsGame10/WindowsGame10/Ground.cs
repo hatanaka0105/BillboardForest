@@ -11,12 +11,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
 namespace BillboardForest
 {
-    public static class ConstantMacro
+    class Ground : DrawObject 
     {
-        public static Color backColor = Color.LawnGreen;
-        public static float fogStart = 1000;
-        public static float fogEnd = 2000;
+        public override void Load(Game game)
+        {
+            model = game.Content.Load <Model>("yuka");
+
+            base.Load(game);
+        }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SkinnedModel;
 
-namespace WindowsGame10
+namespace BillboardForest
 {
     class Player
     {
@@ -215,15 +215,15 @@ namespace WindowsGame10
                 if (countRun < countRunMax)
                 {
                     countRun++;
-                    ChangeAnimationClip("walk", true, 0.0f);
+                    ChangeAnimationClip("walk", true, 3.0f);
                 }
                 else
-                    ChangeAnimationClip("run", true, 0.0f);
+                    ChangeAnimationClip("run", true, 3.0f);
             }
             else
             {
                 countRun = 0;
-                ChangeAnimationClip("idle", true, 0.0f);
+                ChangeAnimationClip("idle", true, 3.0f);
             }
 
             // 回転行列の作成

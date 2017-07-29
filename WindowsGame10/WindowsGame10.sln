@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame10", "WindowsGame10\WindowsGame10\WindowsGame10.csproj", "{5D166A05-9A8C-4D4D-B073-D85CB20E021F}"
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillboardForest", "WindowsGame10\WindowsGame10\BillboardForest.csproj", "{5D166A05-9A8C-4D4D-B073-D85CB20E021F}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "WindowsGame10Content", "WindowsGame10\WindowsGame10Content\WindowsGame10Content.contentproj", "{EE916D25-9E8C-4562-8C76-6FE4E2CA3441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame10Content", "WindowsGame10\WindowsGame10Content\WindowsGame10Content.contentproj", "{EE916D25-9E8C-4562-8C76-6FE4E2CA3441}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModel", "SkinnedModel\SkinnedModel.csproj", "{AF013B73-D404-43AB-89DA-0F230772D36A}"
 EndProject

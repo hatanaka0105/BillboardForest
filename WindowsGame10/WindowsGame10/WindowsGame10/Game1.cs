@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SkinnedModel;
 
-namespace WindowsGame10
+namespace BillboardForest
 {
     /// <summary>
     /// 基底 Game クラスから派生した、ゲームのメイン クラスです。
@@ -33,6 +33,8 @@ namespace WindowsGame10
         private Camera camera;
 
         private Player player;
+
+        private List<DrawObject> drawObject = new List<DrawObject>();
 
         /// <summary>
         /// スプライトバッチ
@@ -57,6 +59,8 @@ namespace WindowsGame10
             //アンチエイリアシング
             graphics.PreferMultiSampling = true;
 
+            Window.Title = "BillboardForest";
+
             // コンテントのディレクトリを"Content"に設定する
             Content.RootDirectory = "Content";
 
@@ -73,6 +77,12 @@ namespace WindowsGame10
 
             player = new Player();
             player.Initialize();
+
+            drawObject.Add(new Ground());
+            foreach (DrawObject dObj in drawObject)
+            {
+                dObj.Initialize();
+            }
 
             // カメラの初期化
             InitializeCamera();
@@ -106,6 +116,11 @@ namespace WindowsGame10
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.LoadSkinnedModel(@"C_Skinman", game);
+
+            foreach (DrawObject dObj in drawObject)
+            {
+                dObj.Load(game);
+            }
         }
 
         /// <summary>
@@ -130,12 +145,16 @@ namespace WindowsGame10
 
             // 入力を取得する
             player.UpdateInput(gameTime);
+            // アニメーションの更新
+            player.UpdateAnimation(gameTime, true);
 
             // カメラの更新
             camera.Update(gameTime);
 
-            // アニメーションの更新
-            player.UpdateAnimation(gameTime, true);
+            foreach (DrawObject dObj in drawObject)
+            {
+                dObj.Update();
+            }
 
             base.Update(gameTime);
         }
@@ -147,13 +166,18 @@ namespace WindowsGame10
         protected override void Draw(GameTime gameTime)
         {
             // 背景を塗りつぶす
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(ConstantMacro.backColor);
 
             graphics.GraphicsDevice.BlendState = BlendState.Opaque;
             graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphics.GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
 
             player.Draw(camera);
+
+            foreach (DrawObject dObj in drawObject)
+            {
+                dObj.Draw(camera, ConstantMacro.backColor);
+            }
 
             base.Draw(gameTime);
         }

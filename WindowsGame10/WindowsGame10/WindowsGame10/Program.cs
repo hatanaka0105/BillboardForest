@@ -1,6 +1,6 @@
 using System;
 
-namespace WindowsGame10
+namespace BillboardForest
 {
 #if WINDOWS || XBOX
     static class Program

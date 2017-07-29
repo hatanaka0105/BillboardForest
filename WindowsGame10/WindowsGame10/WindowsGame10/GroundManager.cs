@@ -13,10 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace BillboardForest
 {
-    public static class ConstantMacro
+    class GroundManager
     {
-        public static Color backColor = Color.LawnGreen;
-        public static float fogStart = 1000;
-        public static float fogEnd = 2000;
     }
 }

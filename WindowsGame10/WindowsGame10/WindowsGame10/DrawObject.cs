@@ -11,17 +11,20 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace WindowsGame10
+namespace BillboardForest
 {
-    class DraｗObject
+    class DrawObject
     {
-        Model model;
-        Material material;
+        protected Model model;
+        protected Material material;
 
-        Vector3 position;
-        Vector3 rotation;
-        Vector3 scale;
-        Matrix world;
+        protected Vector3 position;
+        protected Vector3 rotation;
+        protected Vector3 scale;
+        protected Matrix world;
+
+        protected BoundingBox boundingBox;
+        protected BoundingSphere boundingSphere;
 
         public virtual void Initialize()
         {
@@ -49,8 +52,9 @@ namespace WindowsGame10
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.FogEnabled = true;
-                    effect.FogStart = 1000;
-                    effect.FogEnd = 1400;
+                    effect.FogColor = fogColor.ToVector3();
+                    effect.FogStart = ConstantMacro.fogStart;
+                    effect.FogEnd = ConstantMacro.fogEnd;
 
                     effect.View = camera.View;
                     effect.Projection = camera.Projection;
