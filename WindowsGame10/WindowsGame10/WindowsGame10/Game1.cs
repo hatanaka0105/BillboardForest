@@ -54,6 +54,9 @@ namespace WindowsGame10
             this.graphics.PreferredBackBufferWidth = width;
             this.graphics.PreferredBackBufferHeight = height;
 
+            //アンチエイリアシング
+            graphics.PreferMultiSampling = true;
+
             // コンテントのディレクトリを"Content"に設定する
             Content.RootDirectory = "Content";
 
@@ -145,6 +148,10 @@ namespace WindowsGame10
         {
             // 背景を塗りつぶす
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            graphics.GraphicsDevice.BlendState = BlendState.Opaque;
+            graphics.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            graphics.GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
 
             player.Draw(camera);
 
