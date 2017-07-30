@@ -82,7 +82,7 @@ namespace BillboardForest
             drawObject.Add(new Tree());
             foreach (DrawObject dObj in drawObject)
             {
-                dObj.Initialize();
+                dObj.Initialize(this);
             }
 
             // カメラの初期化

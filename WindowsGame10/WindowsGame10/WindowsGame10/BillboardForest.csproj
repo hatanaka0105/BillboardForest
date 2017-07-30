@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="ConstantMacro.cs" />
+    <Compile Include="DrawBillboardObject.cs" />
     <Compile Include="DrawObject.cs" />
     <Compile Include="Ground.cs" />
     <Compile Include="GroundManager.cs" />

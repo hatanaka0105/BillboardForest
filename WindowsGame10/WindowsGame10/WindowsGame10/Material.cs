@@ -29,5 +29,13 @@ namespace BillboardForest
 
         public Effect effect;
         public BasicEffect basicEffect;
+
+        public GraphicsDevice graphicsDevice;
+
+        public Material(Game game)
+        {
+            basicEffect = new BasicEffect(game.GraphicsDevice);
+            basicEffect.TextureEnabled = true;
+        }
     }
 }

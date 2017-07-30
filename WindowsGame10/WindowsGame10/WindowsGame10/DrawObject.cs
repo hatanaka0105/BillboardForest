@@ -26,9 +26,9 @@ namespace BillboardForest
         protected BoundingBox boundingBox;
         protected BoundingSphere boundingSphere;
 
-        public virtual void Initialize()
+        public virtual void Initialize(Game game)
         {
-            material = new Material();
+            material = new Material(game);
             world = Matrix.Identity;
         }
 
@@ -73,7 +73,8 @@ namespace BillboardForest
                     foreach (BasicEffect effect in mesh.Effects)
                     {
                         effect.LightingEnabled = true;
-                        effect.DiffuseColor = Color.Green.ToVector3();
+                        effect.Texture = material.diffuseMap;
+                        effect.DiffuseColor = material.diffuseColor.ToVector3();
 
                         effect.FogEnabled = true;
                         effect.FogColor = fogColor.ToVector3();
