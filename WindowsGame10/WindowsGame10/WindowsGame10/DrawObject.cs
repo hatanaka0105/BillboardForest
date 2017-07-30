@@ -28,6 +28,7 @@ namespace BillboardForest
 
         public virtual void Initialize()
         {
+            material = new Material();
             world = Matrix.Identity;
         }
 
@@ -41,27 +42,51 @@ namespace BillboardForest
 
         public virtual void Draw(Camera camera, Color fogColor)
         {
-            if (material == null)
-                DrawBasic(camera, fogColor);
+            DrawBasic(camera, fogColor);
         }
 
         public void DrawBasic(Camera camera, Color fogColor)
         {
-            foreach (ModelMesh mesh in model.Meshes)
+            if (material.diffuseMap == null)
             {
-                foreach (BasicEffect effect in mesh.Effects)
+                foreach (ModelMesh mesh in model.Meshes)
                 {
-                    effect.FogEnabled = true;
-                    effect.FogColor = fogColor.ToVector3();
-                    effect.FogStart = ConstantMacro.fogStart;
-                    effect.FogEnd = ConstantMacro.fogEnd;
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        effect.FogEnabled = true;
+                        effect.FogColor = fogColor.ToVector3();
+                        effect.FogStart = ConstantMacro.fogStart;
+                        effect.FogEnd = ConstantMacro.fogEnd;
 
-                    effect.View = camera.View;
-                    effect.Projection = camera.Projection;
-                    effect.World = world;
+                        effect.View = camera.View;
+                        effect.Projection = camera.Projection;
+                        effect.World = world;
+                    }
+
+                    mesh.Draw();
                 }
+            }
+            else
+            {
+                foreach (ModelMesh mesh in model.Meshes)
+                {
+                    foreach (BasicEffect effect in mesh.Effects)
+                    {
+                        effect.LightingEnabled = true;
+                        effect.DiffuseColor = Color.Green.ToVector3();
 
-                mesh.Draw();
+                        effect.FogEnabled = true;
+                        effect.FogColor = fogColor.ToVector3();
+                        effect.FogStart = ConstantMacro.fogStart;
+                        effect.FogEnd = ConstantMacro.fogEnd;
+
+                        effect.View = camera.View;
+                        effect.Projection = camera.Projection;
+                        effect.World = world;
+                    }
+
+                    mesh.Draw();
+                }
             }
         }
     }

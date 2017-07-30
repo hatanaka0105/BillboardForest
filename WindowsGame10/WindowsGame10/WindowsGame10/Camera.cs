@@ -156,7 +156,7 @@ namespace BillboardForest
             transformedReference = Vector3.Transform(referenceTranslate, rotationMatrix);
 
             // ターゲットと距離からカメラの位置を計算する
-            position = transformedReference + target + new Vector3 (0.0f, 200.0f, 800.0f);
+            position = transformedReference + target + new Vector3 (0.0f, -200.0f, 800.0f);
 
             // ビュー行列を更新する
             view = Matrix.CreateLookAt(position, target, rotationMatrix.Up);

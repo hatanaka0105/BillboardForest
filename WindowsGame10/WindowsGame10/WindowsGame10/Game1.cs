@@ -79,6 +79,7 @@ namespace BillboardForest
             player.Initialize();
 
             drawObject.Add(new Ground());
+            drawObject.Add(new Tree());
             foreach (DrawObject dObj in drawObject)
             {
                 dObj.Initialize();
@@ -102,7 +103,7 @@ namespace BillboardForest
             camera.FieldOfView = MathHelper.ToRadians(45.0f);
             camera.AspectRatio = (float)GraphicsDevice.Viewport.Width / (float)GraphicsDevice.Viewport.Height;
             camera.NearPlaneDistance = 1.0f;
-            camera.FarPlaneDistance = 2000.0f;
+            camera.FarPlaneDistance = 5000.0f;
             camera.ReferenceTranslate = new Vector3(0.0f, 0.0f, 300.0f);
             camera.Target = new Vector3(0.0f, 100.0f, 0.0f);
         }
