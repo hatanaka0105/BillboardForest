@@ -36,6 +36,8 @@ namespace BillboardForest
 
         private List<DrawObject> drawObject = new List<DrawObject>();
 
+        private List<DrawBillboardObject> drawBillboardObject = new List<DrawBillboardObject>();
+
         /// <summary>
         /// スプライトバッチ
         /// </summary>
@@ -85,6 +87,12 @@ namespace BillboardForest
                 dObj.Initialize(this);
             }
 
+            drawBillboardObject.Add(new DrawBillboardObject());
+            foreach (DrawBillboardObject dBObj in drawBillboardObject)
+            {
+                dBObj.Initialize(game);
+            }
+
             // カメラの初期化
             InitializeCamera();
 
@@ -122,6 +130,11 @@ namespace BillboardForest
             {
                 dObj.Load(game);
             }
+
+            foreach (DrawBillboardObject dBObj in drawBillboardObject)
+            {
+                dBObj.Load(game);
+            }
         }
 
         /// <summary>
@@ -157,6 +170,11 @@ namespace BillboardForest
                 dObj.Update();
             }
 
+            foreach (DrawBillboardObject dBObj in drawBillboardObject)
+            {
+                dBObj.Update();
+            }
+
             base.Update(gameTime);
         }
 
@@ -178,6 +196,11 @@ namespace BillboardForest
             foreach (DrawObject dObj in drawObject)
             {
                 dObj.Draw(camera, ConstantMacro.backColor);
+            }
+
+            foreach (DrawBillboardObject dBObj in drawBillboardObject)
+            {
+                dBObj.Draw(game, camera);
             }
 
             base.Draw(gameTime);

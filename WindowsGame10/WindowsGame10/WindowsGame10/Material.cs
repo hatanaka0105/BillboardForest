@@ -35,7 +35,6 @@ namespace BillboardForest
         public Material(Game game)
         {
             basicEffect = new BasicEffect(game.GraphicsDevice);
-            basicEffect.TextureEnabled = true;
         }
     }
 }
