@@ -19,7 +19,7 @@ namespace BillboardForest
         protected Material material;
 
         protected Vector3 position;
-        protected Vector3 rotation;
+        protected float rotation;
         protected Vector3 scale;
         protected Matrix world;
 
@@ -36,38 +36,63 @@ namespace BillboardForest
             material = new Material(game);
             world = Matrix.Identity;
 
-            position = Vector3.UnitY * 100;
+            rotation = 0;
+            position = Vector3.UnitZ* 500 + Vector3.UnitY * 100;
             scale = Vector3.One * 100;
         }
 
         protected virtual void SetVertexPositionColor()
         {
             vertexPositionColor[0] = new VertexPositionColor(
-                new Vector3(-1, 1, 0) * scale + position, Color.Blue);
+                new Vector3(-(float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    1,
+                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    Color.Blue);
 
             vertexPositionColor[1] = new VertexPositionColor(
-                new Vector3(1, 1, 0) * scale + position, Color.Green);
+                new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    1,
+                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    Color.Blue);
 
             vertexPositionColor[2] = new VertexPositionColor(
-                new Vector3(-1, -1, 0) * scale + position, Color.Red);
+                new Vector3(-(float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    1,
+                    -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    Color.Blue);
 
             vertexPositionColor[3] = new VertexPositionColor(
-                new Vector3(1, -1, 0) * scale + position, Color.Yellow);
+                new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    1,
+                    -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    Color.Blue);
         }
 
         protected virtual void SetVertexPositionTexture()
         {
             vertexPositionTexture[0] = new VertexPositionTexture(
-                new Vector3(-1, 1, 0) * scale + position, new Vector2(0.0f, 0.0f));
+                 new Vector3(-(float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    1,
+                    -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    new Vector2(0.0f, 0.0f));
 
             vertexPositionTexture[1] = new VertexPositionTexture(
-                new Vector3(1, 1, 0) * scale + position, new Vector2(1.0f, 0.0f));
+                new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    1,
+                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position, 
+                    new Vector2(1.0f, 0.0f));
 
             vertexPositionTexture[2] = new VertexPositionTexture(
-                new Vector3(-1, -1, 0) * scale + position, new Vector2(0.0f, 1.0f));
+                new Vector3(-(float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    -1,
+                    -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    new Vector2(0.0f, 1.0f));
 
             vertexPositionTexture[3] = new VertexPositionTexture(
-                new Vector3(1, -1, 0) * scale + position, new Vector2(1.0f, 1.0f));
+                new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
+                    -1,
+                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
+                    new Vector2(1.0f, 1.0f));
         }
 
         public virtual void Load(Game game)
@@ -102,7 +127,6 @@ namespace BillboardForest
             {
                 material.basicEffect.TextureEnabled = true;
                 material.basicEffect.Texture = material.diffuseMap;
-                game.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             }
         }
 
@@ -112,13 +136,19 @@ namespace BillboardForest
 
         public virtual void Draw(Game game, Camera camera)
         {
+            game.GraphicsDevice.BlendState = BlendState.AlphaBlend;
+
             material.basicEffect.View = camera.View;
             material.basicEffect.Projection = camera.Projection;
             material.basicEffect.World = world;
 
+            material.basicEffect.FogEnabled = true;
+            material.basicEffect.FogColor = ConstantMacro.backColor.ToVector3();
+            material.basicEffect.FogStart = ConstantMacro.fogStart;
+            material.basicEffect.FogEnd = ConstantMacro.fogEnd;
+
             // 頂点バッファをセットします
             game.GraphicsDevice.SetVertexBuffer(vertexBuffer);
-            Console.WriteLine(game.GraphicsDevice.BlendState.ToString());
 
             // パスの数だけ繰り替えし描画
             foreach (EffectPass pass in material.basicEffect.CurrentTechnique.Passes)

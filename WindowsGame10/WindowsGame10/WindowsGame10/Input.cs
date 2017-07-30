@@ -26,6 +26,7 @@ namespace BillboardForest
         static float angle = 0;
 
         static MoveVectorKey moveVecKey;
+        static MoveVectorKey cameraVecKey;
 
         public static void Initialize()
         {
@@ -34,6 +35,9 @@ namespace BillboardForest
             moveVecKey.down = Keys.S;
             moveVecKey.right = Keys.D;
             moveVecKey.left = Keys.A;
+
+            cameraVecKey.right = Keys.Right;
+            cameraVecKey.left = Keys.Left;
         }
 
         public static float GetRotationAngle()
@@ -87,6 +91,17 @@ namespace BillboardForest
                 || InputManager.IsKeyDown(moveVecKey.right)
                 || InputManager.IsKeyDown(moveVecKey.down)
                 || InputManager.IsKeyDown(moveVecKey.up);
+        }
+
+        public static float GetCameraMove()
+        {
+            if (InputManager.IsKeyDown(cameraVecKey.right))
+                return 1;
+
+            if (InputManager.IsKeyDown(cameraVecKey.left))
+                return -1;
+
+            return 0;
         }
     }
 }
