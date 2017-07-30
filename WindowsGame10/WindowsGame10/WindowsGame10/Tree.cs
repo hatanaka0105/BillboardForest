@@ -21,8 +21,8 @@ namespace BillboardForest
             material.diffuseMap = game.Content.Load<Texture2D>("Tree_D");
             material.diffuseColor = Color.Green;
 
-            scale = Vector3.One * 50;
-            position = new Vector3(250, 0, 200);
+            scale = new Vector3 (50, 45, 50);
+            position = new Vector3(200, 0, 300);
 
             world = Matrix.CreateScale(scale) * Matrix.CreateTranslation (position);
 

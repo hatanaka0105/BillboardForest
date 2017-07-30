@@ -72,23 +72,27 @@ namespace BillboardForest
 
         public virtual void Load(Game game)
         {
+            material.diffuseMap = game.Content.Load<Texture2D>("Tree_Billboard");
+
             if (material.diffuseMap == null)
             {
-                SetVertexPositionColor();
                 vertexBuffer = new VertexBuffer(game.GraphicsDevice,
                                typeof(VertexPositionColor),
-                               vertexPositionColor.Length,
+                               vertexNum,
                                BufferUsage.None);
+
+                SetVertexPositionColor();
 
                 vertexBuffer.SetData(vertexPositionColor);
             }
             else
             {
-                SetVertexPositionTexture();
                 vertexBuffer = new VertexBuffer(game.GraphicsDevice,
                                typeof(VertexPositionTexture),
-                               vertexPositionTexture.Length,
+                               vertexNum,
                                BufferUsage.None);
+
+                SetVertexPositionTexture();
 
                 vertexBuffer.SetData(vertexPositionTexture);
                 material.basicEffect.Texture = material.diffuseMap;
@@ -98,6 +102,7 @@ namespace BillboardForest
             {
                 material.basicEffect.TextureEnabled = true;
                 material.basicEffect.Texture = material.diffuseMap;
+                game.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             }
         }
 
@@ -113,6 +118,7 @@ namespace BillboardForest
 
             // 頂点バッファをセットします
             game.GraphicsDevice.SetVertexBuffer(vertexBuffer);
+            Console.WriteLine(game.GraphicsDevice.BlendState.ToString());
 
             // パスの数だけ繰り替えし描画
             foreach (EffectPass pass in material.basicEffect.CurrentTechnique.Passes)
