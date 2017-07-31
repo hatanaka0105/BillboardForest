@@ -48,7 +48,9 @@ namespace BillboardForest
 
         public bool keyInput = false;
 
-        Game game;
+        private Game game;
+
+        private SpriteFont font;
 
         /// <summary>
         /// コンストラクタ
@@ -131,6 +133,8 @@ namespace BillboardForest
             }
 
             treeManager.Load();
+
+            font = game.Content.Load<SpriteFont>("font");
         }
 
         /// <summary>
@@ -200,6 +204,13 @@ namespace BillboardForest
             }
 
             treeManager.Draw(camera);
+
+            spriteBatch.Begin();
+
+            spriteBatch.DrawString(font, "AWSD Key : Move", Vector2.One * 10, Color.Black);
+            spriteBatch.DrawString(font, "Arrow Key : Camera", Vector2.One * 10 + Vector2.UnitY * 20, Color.Black);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
