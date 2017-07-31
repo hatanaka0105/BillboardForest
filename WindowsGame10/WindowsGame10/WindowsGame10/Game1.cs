@@ -31,6 +31,7 @@ namespace BillboardForest
         /// カメラ
         /// </summary>
         private Camera camera;
+        private float angle;
 
         private Player player;
 
@@ -163,6 +164,14 @@ namespace BillboardForest
             player.UpdateAnimation(gameTime, true);
 
             // カメラの更新
+            if (Input.GetCameraMove() != 0)
+                angle += Input.GetCameraMove();
+
+            camera.ReferenceTranslate = new Vector3(
+                (float)Math.Cos(MathHelper.ToRadians(angle)),
+                0.4f,
+                (float)Math.Sin(MathHelper.ToRadians(angle))) * 1200;
+
             camera.Update(gameTime);
 
             foreach (DrawObject dObj in drawObject)
