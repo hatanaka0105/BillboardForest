@@ -36,16 +36,26 @@ namespace BillboardForest
         {
         }
 
+        public virtual void Load(Game game, Model model)
+        {
+
+        }
+
+        public virtual void Load(Game game, Model model, Texture2D texture)
+        {
+
+        }
+
         public virtual void Update()
         {
         }
 
-        public virtual void Draw(Camera camera, Color fogColor)
+        public virtual void Draw(Camera camera)
         {
-            DrawBasic(camera, fogColor);
+            DrawBasic(camera);
         }
 
-        public void DrawBasic(Camera camera, Color fogColor)
+        public void DrawBasic(Camera camera)
         {
             if (material.diffuseMap == null)
             {
@@ -54,7 +64,7 @@ namespace BillboardForest
                     foreach (BasicEffect effect in mesh.Effects)
                     {
                         effect.FogEnabled = true;
-                        effect.FogColor = fogColor.ToVector3();
+                        effect.FogColor = ConstantMacro.backColor.ToVector3();
                         effect.FogStart = ConstantMacro.fogStart;
                         effect.FogEnd = ConstantMacro.fogEnd;
 
@@ -77,7 +87,7 @@ namespace BillboardForest
                         effect.DiffuseColor = material.diffuseColor.ToVector3();
 
                         effect.FogEnabled = true;
-                        effect.FogColor = fogColor.ToVector3();
+                        effect.FogColor = ConstantMacro.backColor.ToVector3();
                         effect.FogStart = ConstantMacro.fogStart;
                         effect.FogEnd = ConstantMacro.fogEnd;
 

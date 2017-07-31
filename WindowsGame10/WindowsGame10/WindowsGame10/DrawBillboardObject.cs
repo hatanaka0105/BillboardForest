@@ -37,7 +37,7 @@ namespace BillboardForest
             world = Matrix.Identity;
 
             rotation = 0;
-            position = Vector3.UnitZ* 500 + Vector3.UnitY * 100;
+            position = Vector3.UnitZ * 500 + Vector3.UnitY * 100;
             scale = Vector3.One * 100;
         }
 
@@ -73,7 +73,7 @@ namespace BillboardForest
             vertexPositionTexture[1] = new VertexPositionTexture(
                 new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
                     1,
-                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position, 
+                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
                     new Vector2(1.0f, 0.0f));
 
             vertexPositionTexture[2] = new VertexPositionTexture(
@@ -113,6 +113,39 @@ namespace BillboardForest
             {
                 material.basicEffect.TextureEnabled = true;
                 material.basicEffect.Texture = material.diffuseMap;
+            }
+        }
+
+        public virtual void Load(Game game, Texture2D texture)
+        {
+            if (material.diffuseMap == null)
+            {
+                vertexBuffer = new VertexBuffer(game.GraphicsDevice,
+                               typeof(VertexPositionColor),
+                               vertexNum,
+                               BufferUsage.None);
+
+                SetVertexPositionColor();
+
+                vertexBuffer.SetData(vertexPositionColor);
+            }
+            else
+            {
+                vertexBuffer = new VertexBuffer(game.GraphicsDevice,
+                               typeof(VertexPositionTexture),
+                               vertexNum,
+                               BufferUsage.None);
+
+                SetVertexPositionTexture();
+
+                vertexBuffer.SetData(vertexPositionTexture);
+                material.basicEffect.Texture = material.diffuseMap;
+            }
+
+            if (material.diffuseMap != null)
+            {
+                material.basicEffect.TextureEnabled = true;
+                material.basicEffect.Texture = texture;
             }
         }
 

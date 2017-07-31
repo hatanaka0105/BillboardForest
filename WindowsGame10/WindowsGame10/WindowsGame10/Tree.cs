@@ -21,12 +21,40 @@ namespace BillboardForest
             material.diffuseMap = game.Content.Load<Texture2D>("Tree_D");
             material.diffuseColor = Color.Green;
 
-            scale = new Vector3 (50, 45, 50);
+            scale = new Vector3(50, 45, 50);
             position = new Vector3(200, 0, 300);
 
-            world = Matrix.CreateScale(scale) * Matrix.CreateTranslation (position);
+            world = Matrix.CreateScale(scale) * Matrix.CreateTranslation(position);
 
             base.Load(game);
+        }
+
+        public override void Load(Game game, Model model)
+        {
+            this.model = model;
+            material.diffuseMap = game.Content.Load<Texture2D>("Tree_D");
+            material.diffuseColor = Color.Green;
+
+            scale = new Vector3(50, 45, 50);
+            position = new Vector3(200, 0, 300);
+
+            world = Matrix.CreateScale(scale) * Matrix.CreateTranslation(position);
+
+            base.Load(game, model);
+        }
+
+        public override void Load(Game game, Model model, Texture2D texture)
+        {
+            this.model = model;
+            material.diffuseMap = texture;
+            material.diffuseColor = Color.Green;
+
+            scale = new Vector3(50, 45, 50);
+            position = new Vector3(200, 0, 300);
+
+            world = Matrix.CreateScale(scale) * Matrix.CreateTranslation(position);
+
+            base.Load(game, model, texture);
         }
     }
 }
