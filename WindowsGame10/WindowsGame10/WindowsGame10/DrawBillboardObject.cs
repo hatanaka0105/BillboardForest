@@ -26,7 +26,7 @@ namespace BillboardForest
         protected BoundingBox boundingBox;
         protected BoundingSphere boundingSphere;
 
-        protected const int vertexNum = 4;
+        protected const int vertexNum = 3;
         protected VertexBuffer vertexBuffer;
         protected VertexPositionColor[] vertexPositionColor = new VertexPositionColor[vertexNum];
         protected VertexPositionTexture[] vertexPositionTexture = new VertexPositionTexture[vertexNum];
@@ -60,12 +60,6 @@ namespace BillboardForest
                     1,
                     -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
                     Color.Blue);
-
-            vertexPositionColor[3] = new VertexPositionColor(
-                new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
-                    1,
-                    -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
-                    Color.Blue);
         }
 
         protected virtual void SetVertexPositionTexture()
@@ -87,18 +81,10 @@ namespace BillboardForest
                     -1,
                     -(float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
                     new Vector2(0.0f, 1.0f));
-
-            vertexPositionTexture[3] = new VertexPositionTexture(
-                new Vector3((float)Math.Cos(MathHelper.ToRadians(rotation)),
-                    -1,
-                    (float)Math.Sin(MathHelper.ToRadians(rotation))) * scale + position,
-                    new Vector2(1.0f, 1.0f));
         }
 
         public virtual void Load(Game game)
         {
-            material.diffuseMap = game.Content.Load<Texture2D>("Tree_Billboard");
-
             if (material.diffuseMap == null)
             {
                 vertexBuffer = new VertexBuffer(game.GraphicsDevice,

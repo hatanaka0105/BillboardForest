@@ -31,7 +31,7 @@ namespace BillboardForest
         /// カメラ
         /// </summary>
         private Camera camera;
-        private float angle;
+        private float angle = 90;
 
         private Player player;
 
